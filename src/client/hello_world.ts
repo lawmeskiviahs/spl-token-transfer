@@ -5,6 +5,7 @@ import {
   TransactionInstruction,
   Transaction,
   sendAndConfirmTransaction,
+  SystemProgram,
 } from '@solana/web3.js';
 import {createAssociatedTokenAccount, getAssociatedTokenAddress, TOKEN_PROGRAM_ID} from "@solana/spl-token"
 
@@ -38,12 +39,12 @@ Promise<PublicKey> {
 
 export async function sayHello(): Promise<void> {
   
-  let programId = new PublicKey('UbYmbpmTewbV3BbYKQ5Cu9mLFMCPPdXZJU9LwPNpDVo');
-  let from_token_account = new PublicKey('8QhuyEzMW6fuPjVXSpVr2d4Uneq5D9HKe38wS5zeDLoB');
-  let to_token_account = new PublicKey('EiXe8j89L1eySAZvSX4vdeqXA3mm9gyqPD75ET5SX9Dz');
+  let programId = new PublicKey('ALYkUw5TjKvSqvU1n4BJhLzWJCLSNwG6whayipfDsb8f');
+  // let from_token_account = new PublicKey('8QhuyEzMW6fuPjVXSpVr2d4Uneq5D9HKe38wS5zeDLoB');
+  let to_account = new PublicKey('5HBM1p3iLhFPoURaXVmGcCgrAyp4Mk1jG9xN6JkwfAEt');
   
   const instruction = new TransactionInstruction({
-    keys: [{pubkey: payer.publicKey, isSigner: true, isWritable: false},{pubkey: from_token_account, isSigner: false, isWritable: true},{pubkey: to_token_account, isSigner:false, isWritable: true},{pubkey: TOKEN_PROGRAM_ID, isSigner:false, isWritable: false}],
+    keys: [{pubkey: payer.publicKey, isSigner: true, isWritable: false},{pubkey: to_account, isSigner: false, isWritable: true},{pubkey: SystemProgram.programId, isSigner:false, isWritable: false}],
     programId,
     data: Buffer.alloc(0), 
   });
